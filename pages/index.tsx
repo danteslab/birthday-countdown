@@ -1,11 +1,8 @@
 import React from 'react'
+import { Counter } from '../components/Counter'
 
 const Index = () => {
-  return (
-    <div>
-      <h1>Hello World</h1>
-    </div>
-  )
+  return <Counter />
 }
 
 export default Index
