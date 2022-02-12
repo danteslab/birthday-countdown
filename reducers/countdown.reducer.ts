@@ -1,9 +1,9 @@
 export type CountdownState = {
   birthday: Date
-  dd: number
-  hh: number
-  mm: number
-  ss: number
+  days: number
+  hours: number
+  minutes: number 
+  seconds: number
 }
 
 export type CountdownAction = {
@@ -13,14 +13,36 @@ export type CountdownAction = {
 
 export enum CountdownActionType {
   UPDATE_DATE = 'UPDATE_DATE',
+  RECALCULATE = 'RECALCULATE'
 }
 
 export function countdownContextReducer(state: CountdownState, action: CountdownAction) {
   switch (action.type) {
     case CountdownActionType.UPDATE_DATE:
+      return {
+        ...state,
+        birthday: action.payload.birthday
+      };
+    case CountdownActionType.RECALCULATE:
+      const birthday = new Date(action.payload.birthday.getTime())
+      const now = new Date();
+      /** To calculate the difference of this year birthday */
+      birthday.setFullYear(now.getFullYear());
 
+      const missingMiliseconds = birthday.getTime() - now.getTime();
 
-      return state;
+      const days = Math.floor(missingMiliseconds / 8.64e+7)
+      const hours =Math.floor((missingMiliseconds % 8.64e+7) / 3.6e+6)
+      const minutes = Math.floor(((missingMiliseconds % 8.64e+7) % 3.6e+6 ) / 60000)
+      const seconds = Math.floor((((missingMiliseconds % 8.64e+7) % 3.6e+6 ) % 60000) / 1000)
+
+      return {
+        ...state,
+        days,
+        hours,
+        minutes,
+        seconds
+      }; 
     default:
       return state
   }
@@ -31,9 +53,9 @@ export function countdownStateInitializer(): CountdownState {
 
   return {
     birthday: initialGoalDate,
-    dd: 12,
-    hh: 12,
-    mm: 22,
-    ss: 29
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
   }
 }

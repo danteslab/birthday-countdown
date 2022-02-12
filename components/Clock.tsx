@@ -2,13 +2,20 @@ import React from 'react'
 import styled from 'styled-components'
 import { ClockBox } from './ClockBox'
 
-export const Clock = () => {
+interface ClockProps {
+  days: number
+  hours: number
+  minutes: number 
+  seconds: number
+}
+
+export const Clock = ({  days, hours, minutes, seconds }: ClockProps) => {
   return (
     <ClockContainer>
-      <ClockBox count={'149'} text="Days" />
-      <ClockBox count={'14'} text="Hours" />
-      <ClockBox count={'34'} text="Minutes" />
-      <ClockBox count={'58'} text="Seconds" />
+      <ClockBox count={days} text="Days" />
+      <ClockBox count={hours} text="Hours" />
+      <ClockBox count={minutes} text="Minutes" />
+      <ClockBox count={seconds} text="Seconds" />
     </ClockContainer>
   )
 }
