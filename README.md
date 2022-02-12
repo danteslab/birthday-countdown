@@ -1,3 +1,16 @@
-# nextjs-tsc-basic-starter
+# Birthday Countdown
 
-A basic starter for Next.js with TypeScript
+A birthday counter down
+
+## Install
+
+```
+npm ci
+```
+
+
+## Start in Dev Mode
+
+```
+npm run dev
+```
