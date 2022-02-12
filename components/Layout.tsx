@@ -1,12 +1,19 @@
 import React from 'react'
 import styled from 'styled-components'
+import { CountdownContextProvider } from '../contexts/countdown.context'
 
 type LayoutProps = {
   children: React.ReactChild
 }
 
 export const Layout = ({ children }: LayoutProps) => {
-  return <Container>{children}</Container>
+  return  (
+    <CountdownContextProvider>
+      <Container>
+        {children}
+      </Container>
+    </CountdownContextProvider>
+  )
 }
 
 const Container = styled.div`

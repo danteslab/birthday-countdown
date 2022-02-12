@@ -12,20 +12,19 @@ type CountdownContextProviderProps = {
 
 const CountDownContext = React.createContext(undefined)
 
-function GlobalContextProvider({ children }: CountdownContextProviderProps) {
-  const [countdownState, dispatchCountdownAction] = useReducer(countdownContextReducer, {}, countdownStateInitializer)
+function CountdownContextProvider({ children }: CountdownContextProviderProps) {
+  const [countdownState, dispatchCountdownAction] = useReducer(countdownContextReducer, undefined, countdownStateInitializer)
 
   const value: CountdownContextValue = {
     globalState: countdownState,
     dispatchGlobal: dispatchCountdownAction,
   }
 
-  return (<CountDownContext.Provider value={value}>
-    {children}
+  return (
+    <CountDownContext.Provider value={value}>
+      {children}
     </CountDownContext.Provider>
-    )
+  )
 }
 
-const GlobalContextConsumer = CountDownContext.Consumer
-
-export { CountDownContext, GlobalContextConsumer, GlobalContextProvider }
+export { CountDownContext, CountdownContextProvider }
