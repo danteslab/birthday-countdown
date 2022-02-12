@@ -28,11 +28,8 @@ export const Countdown = () => {
   }, [])
 
   useEffect(() => {
-    console.info('Birthday modified')
-    console.log(countdownState.birthday)
-
     if(interval.current) {
-      console.info('Clearing interval')
+      console.info('Clearing interval due to birthday has been updated')
       clearInterval(interval.current)
     }
 
