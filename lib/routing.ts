@@ -2,7 +2,7 @@ import { NextRouter } from 'next/router'
 import Morph from 'morphmorph'
 import url, { UrlWithParsedQuery } from 'url'
 import { ClockState } from '../types/clock-state.type'
-import { escapeHtml } from './utils'
+import { escapeHtml, isValidDate } from './utils'
 
 const URL_LIMIT = 4e3
 
@@ -26,8 +26,12 @@ const mapper = new Morph({
         .map(i => parseInt(i))
     },
     date: v => {
-      console.log('🤫 Dante ➤ v', v)
       const date = new Date(v);
+      if(!isValidDate(date)) {
+        console.error('The date value you specified is not valid', { value: v })
+        return undefined;
+      }
+
       return new Date(date.getTime() + date.getTimezoneOffset() * 60000)
     },
     parse: v => {

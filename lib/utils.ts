@@ -12,3 +12,7 @@ export const unescapeHtml = s => {
     return htmlUnescape(s).replace(/&#x2F;/g, '/')
   }
 }
+
+export function isValidDate(date): boolean {
+  return date instanceof Date && !isNaN(date as any)
+}
