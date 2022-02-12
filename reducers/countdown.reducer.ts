@@ -24,7 +24,7 @@ export function countdownContextReducer(state: CountdownState, action: Countdown
         birthday: action.payload.birthday
       };
     case CountdownActionType.RECALCULATE:
-      const birthday = new Date(action.payload.birthday.getTime())
+      const birthday = new Date(state.birthday.getTime())
       const now = new Date();
       /** To calculate the difference of this year birthday */
       birthday.setFullYear(now.getFullYear());
@@ -49,7 +49,7 @@ export function countdownContextReducer(state: CountdownState, action: Countdown
 }
 
 export function countdownStateInitializer(): CountdownState {
-  const initialGoalDate = new Date(new Date().getTime() - 100000);
+  const initialGoalDate = new Date(new Date().getTime() - 100000000);
 
   return {
     birthday: initialGoalDate,
