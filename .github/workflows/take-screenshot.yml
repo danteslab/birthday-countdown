@@ -1,25 +1,27 @@
 on:
   push:
     branches:
-      - develop
+      - master
 jobs:
   take-website-screenshot:
     runs-on: ubuntu-latest
-    if: ${{ github.actor != 'octocat' }}
+    if: ${{ github.actor != 'github-actions[bot]' }}
     steps:
       - uses: actions/checkout@v2
+
       - name: Create screenshots folder
         run: mkdir -p .github/screenshots
-      - run: pwd
+
       - name: Screenshot Website
         uses: swinton/screenshot-website@v1.x
         with:
           source: https://birthday-countdown.vercel.app/?b=2022-11-29
           destination: web_screenshot.png
           delay: 1
+
       - name: Move generated screenshot to the git repository
         run: mv -f ${{ runner.temp }}/web_screenshot.png .github/screenshots
-      - run: echo ${{ github.actor }}
+
       - uses: EndBug/add-and-commit@v8
         with:
           message: 'Update web screenshot'
