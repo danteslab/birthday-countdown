@@ -25,9 +25,10 @@ export const Layout = ({ children }: LayoutProps) => {
 const Container = styled.div`
   background: #f9fafa;
   height: 100vh;
-  background-image: url('https://images.unsplash.com/photo-1644577524390-acb708587c7e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2382&q=80');
+  background-image: url('https://images.unsplash.com/photo-1464347601390-25e2842a37f7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2110&q=80');
   background-repeat: no-repeat;
   background-attachment: fixed;
+  background-size: cover;
   background-position: center;
   display: flex;
   justify-content: center;

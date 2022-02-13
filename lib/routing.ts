@@ -1,7 +1,6 @@
 import { NextRouter } from 'next/router'
 import Morph from 'morphmorph'
 import url, { UrlWithParsedQuery } from 'url'
-import { ClockState } from '../types/clock-state.type'
 import { escapeHtml, isValidDate } from './utils'
 
 const URL_LIMIT = 4e3
@@ -33,6 +32,9 @@ const mapper = new Morph({
       }
 
       return new Date(date.getTime() + date.getTimezoneOffset() * 60000)
+    },
+    encodeDate: (v: Date) => {
+      return v.toISOString().substring(0, 10)
     },
     parse: v => {
       try {
@@ -71,7 +73,7 @@ const readMappings = [
 ]
 
 const writeMappings = [
-  { field: 'birthday:d' },
+  { field: 'birthday:b', type: 'encodeDate' },
 ]
 
 export function deserializeState(serializedState) {
@@ -137,14 +139,16 @@ function fixAsPathEncoding(asPath: string): UrlWithParsedQuery {
 
 
 export function updateRouteState(router: NextRouter, state = {}) {
+  const mappedState = mapper.map(writeMappings, state)
+
   router.replace(
     {
       pathname: router.pathname,
     },
     {
-      query: {
-        ...state,
-      },
-    }
+      pathname: router.pathname,
+      query: mappedState,
+    },
+    { shallow: true, scroll: false }
   )
 }

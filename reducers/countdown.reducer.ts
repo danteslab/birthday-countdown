@@ -1,3 +1,15 @@
+export type CountdownAction = {
+  type: CountdownActionType.UPDATE_DATE,
+  birthday: Date
+} | {
+  type: CountdownActionType.RECALCULATE,
+}  
+
+export enum CountdownActionType {
+  UPDATE_DATE = 'UPDATE_DATE',
+  RECALCULATE = 'RECALCULATE'
+}
+
 export type CountdownState = {
   birthday: Date
   days: number
@@ -6,22 +18,12 @@ export type CountdownState = {
   seconds: number
 }
 
-export type CountdownAction = {
-  type: CountdownActionType
-  payload?: object | any
-}
-
-export enum CountdownActionType {
-  UPDATE_DATE = 'UPDATE_DATE',
-  RECALCULATE = 'RECALCULATE'
-}
-
 export function countdownContextReducer(state: CountdownState, action: CountdownAction) {
   switch (action.type) {
     case CountdownActionType.UPDATE_DATE:
       return {
         ...state,
-        birthday: action.payload.birthday
+        birthday: action.birthday
       };
     case CountdownActionType.RECALCULATE:
       const birthday = new Date(state.birthday.getTime())

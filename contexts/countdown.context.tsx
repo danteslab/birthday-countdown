@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react'
 import { CountdownAction, countdownContextReducer, CountdownState, countdownStateInitializer } from '../reducers/countdown.reducer'
 
-type CountdownContextValue = {
+export type CountdownContextValue = {
   countdownState: CountdownState
   dispatchCountdownAction: React.Dispatch<CountdownAction>
 }
