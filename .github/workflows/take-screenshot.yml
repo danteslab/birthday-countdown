@@ -10,12 +10,17 @@ jobs:
       - name: Create screenshots folder
         run: mkdir -p .github/screenshots
       - run: pwd
-      - name: Screenshot Website
-        uses: swinton/screenshot-website@v1.x
-        with:
-          source: https://birthday-countdown.vercel.app/?b=2022-11-29
-          destination: web_screenshot.png
-      - run: echo ${{env.TEMP_DIR}}
-      - name: Move generated screenshot to the git repository
-        run: mv ${{env.TEMP_DIR}}/web_screenshot.png .github/screenshots
-      - run: ls -lh .github/screenshots
+      - name: check the value of github.workspace and runner.temp
+        run: |
+          echo "github.workspace = ${{ github.workspace }}"
+          echo "GITHUB_WORKSPACE = $GITHUB_WORKSPACE"
+          echo "runner.temp = ${{ runner.temp }}"
+      # - name: Screenshot Website
+      #   uses: swinton/screenshot-website@v1.x
+      #   with:
+      #     source: https://birthday-countdown.vercel.app/?b=2022-11-29
+      #     destination: web_screenshot.png
+      # - run: echo ${{env.TEMP_DIR}}
+      # - name: Move generated screenshot to the git repository
+      #   run: mv ${{env.TEMP_DIR}}/web_screenshot.png .github/screenshots
+      # - run: ls -lh .github/screenshots
