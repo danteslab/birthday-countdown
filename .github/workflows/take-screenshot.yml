@@ -14,6 +14,8 @@ jobs:
         uses: swinton/screenshot-website@v1.x
         with:
           source: https://birthday-countdown.vercel.app/?b=2022-11-29
-          destination: .github/screenshots/web_screenshot.png
-
+          destination: web_screenshot.png
+      - run: echo ${{env.TEMP_DIR}}
+      - name: Move generated screenshot to the git repository
+        run: mv ${{env.TEMP_DIR}}/web_screenshot.png .github/screenshots
       - run: ls -lh .github/screenshots
