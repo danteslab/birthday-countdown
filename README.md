@@ -2,6 +2,10 @@
 
 A birthday counter down
 
+## Screenshot
+
+![Website Screenshot](.github/screenshots/web_screenshot.png)
+
 ## Install
 
 ```

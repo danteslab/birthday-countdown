@@ -3,13 +3,27 @@ on:
     branches:
       - master
 jobs:
-  check-bats-version:
+  take-website-screenshot:
     runs-on: ubuntu-latest
+    if: ${{ github.actor != 'github-actions[bot]' }}
     steps:
       - uses: actions/checkout@v2
-      - run: ls -la
-      # - name: Screenshot Website
-      #   uses: swinton/screenshot-website@v1.x
-      #   with:
-      #     source: https://github.com/swinton/screenshot-website
-      #     destination: screenshot.png
+
+      - name: Create screenshots folder
+        run: mkdir -p .github/screenshots
+
+      - name: Screenshot Website
+        uses: swinton/screenshot-website@v1.x
+        with:
+          source: https://birthday-countdown.vercel.app/?b=2022-11-29
+          destination: web_screenshot.png
+          delay: 1
+
+      - name: Move generated screenshot to the git repository
+        run: mv -f ${{ runner.temp }}/web_screenshot.png .github/screenshots
+
+      - uses: EndBug/add-and-commit@v8
+        with:
+          message: 'Update web screenshot'
+          add: '.github/screenshots'
+          default_author: github_actions
