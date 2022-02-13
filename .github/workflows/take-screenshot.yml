@@ -1,0 +1,15 @@
+on:
+  push:
+    branches:
+      - master
+jobs:
+  check-bats-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: ls -la
+      # - name: Screenshot Website
+      #   uses: swinton/screenshot-website@v1.x
+      #   with:
+      #     source: https://github.com/swinton/screenshot-website
+      #     destination: screenshot.png
