@@ -9,10 +9,11 @@ jobs:
       - uses: actions/checkout@v2
       - name: Create screenshots folder
         run: mkdir -p .github/screenshots
+      - run: pwd
       - name: Screenshot Website
         uses: swinton/screenshot-website@v1.x
         with:
           source: https://birthday-countdown.vercel.app/?b=2022-11-29
           destination: .github/screenshots/web_screenshot.png
-      - run: pwd
+
       - run: ls -lh .github/screenshots
