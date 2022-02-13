@@ -19,10 +19,9 @@ jobs:
           delay: 1
       - name: Move generated screenshot to the git repository
         run: mv -f ${{ runner.temp }}/web_screenshot.png .github/screenshots
-
+      - run: echo ${{ github.actor }}
       - uses: EndBug/add-and-commit@v8
         with:
           message: 'Update web screenshot'
           add: '.github/screenshots'
-          with:
-            default_author: github_actions
+          default_author: github_actions
