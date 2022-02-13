@@ -1,12 +1,14 @@
 on:
   push:
     branches:
-      - master
+      - develop
 jobs:
   check-bats-version:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Create screenshots folder
+        run: mkdir -p .github/screenshots
       - run: ls -la
       # - name: Screenshot Website
       #   uses: swinton/screenshot-website@v1.x
