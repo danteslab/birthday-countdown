@@ -68,9 +68,12 @@ const mapper = new Morph({
   },
 });
 
-const readMappings = [{ field: 'b:birthday', type: 'date' }];
+const readMappings = [{ field: 'b:birthday', type: 'date' }, { field: 'bg:backgroundUrl' }];
 
-const writeMappings = [{ field: 'birthday:b', type: 'encodeDate' }];
+const writeMappings = [
+  { field: 'birthday:b', type: 'encodeDate' },
+  { field: 'backgroundUrl:bg' },
+];
 
 export function deserializeState(serializedState) {
   let stateString;

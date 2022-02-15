@@ -20,3 +20,13 @@ export function isValidDate(date): boolean {
 export function forceLocalDateFromUTCDate(date: Date): Date {
   return new Date(date.getTime() + date.getTimezoneOffset() * 60000);
 }
+
+export function mergeObjects<T>(A: T, B: Record<any, any>) {
+  const C = {};
+
+  Object.keys({ ...A, ...B }).forEach(key => {
+    C[key] = B[key] || A[key];
+  });
+
+  return C as T;
+}

@@ -9,10 +9,12 @@ export function Options({
   countdownState,
   dispatchCountdownAction,
   containerTarget,
-}: CountdownContextValue | any) {
+}: CountdownContextValue & Record<any, any>) {
   const popupTarget = useRef();
-
   const [open, setOpen] = useState(false);
+
+  const [birthday, setBirthday] = useState(countdownState.birthday);
+  const [backgroundUrl, setBackgroundUrl] = useState(countdownState.backgroundUrl);
 
   return (
     <Wrapper>
@@ -30,23 +32,10 @@ export function Options({
         target={popupTarget}
         containerStyle={{ zIndex: 99 }}
         show={open}
-        onHide={() => {
-          console.log('HIHIHIDEEE');
-          setOpen(false);
-        }}
+        onHide={() => setOpen(false)}
       >
         <OptionsContainer>
           <b>Options:</b>
-          <input
-            type="date"
-            value={countdownState.birthday.toISOString().substring(0, 10)}
-            onChange={event => {
-              dispatchCountdownAction({
-                type: CountdownActionType.UPDATE_DATE,
-                birthday: forceLocalDateFromUTCDate(event.target.valueAsDate),
-              });
-            }}
-          />
           <button
             onClick={() => {
               if (!document.fullscreenElement) {
@@ -57,6 +46,29 @@ export function Options({
             }}
           >
             [FullScreen]
+          </button>
+          <input
+            type="date"
+            value={birthday.toISOString().substring(0, 10)}
+            onChange={event => setBirthday(event.target.valueAsDate)}
+          />
+          <input
+            type="text"
+            value={backgroundUrl}
+            onChange={e => setBackgroundUrl(e.target.value)}
+          />
+          <button
+            onClick={() => {
+              dispatchCountdownAction({
+                type: CountdownActionType.INITIALIZE,
+                state: {
+                  backgroundUrl,
+                  birthday: forceLocalDateFromUTCDate(birthday),
+                },
+              });
+            }}
+          >
+            Update
           </button>
         </OptionsContainer>
       </Popover>

@@ -1,4 +1,11 @@
 import { TimeUtils } from '../lib/time.utils';
+import { mergeObjects } from '../lib/utils';
+
+export enum CountdownActionType {
+  INITIALIZE = 'INITIALIZE',
+  UPDATE_DATE = 'UPDATE_DATE',
+  RECALCULATE = 'RECALCULATE',
+}
 
 export type CountdownAction =
   | {
@@ -7,12 +14,11 @@ export type CountdownAction =
     }
   | {
       type: CountdownActionType.RECALCULATE;
+    }
+  | {
+      type: CountdownActionType.INITIALIZE;
+      state: Partial<CountdownState>;
     };
-
-export enum CountdownActionType {
-  UPDATE_DATE = 'UPDATE_DATE',
-  RECALCULATE = 'RECALCULATE',
-}
 
 export type CountdownState = {
   birthday: Date;
@@ -20,7 +26,9 @@ export type CountdownState = {
   hours: number;
   minutes: number;
   seconds: number;
+  backgroundUrl: string;
   isMyBirthday: boolean;
+  routeStateLoaded: boolean;
 };
 
 export function countdownContextReducer(
@@ -28,6 +36,11 @@ export function countdownContextReducer(
   action: CountdownAction
 ): CountdownState {
   switch (action.type) {
+    case CountdownActionType.INITIALIZE:
+      return {
+        ...mergeObjects(state, action.state),
+        routeStateLoaded: true,
+      };
     case CountdownActionType.UPDATE_DATE:
       return {
         ...state,
@@ -73,5 +86,8 @@ export function countdownStateInitializer(): CountdownState {
     minutes: 0,
     seconds: 0,
     isMyBirthday: false,
+    backgroundUrl:
+      'https://images.unsplash.com/photo-1464347601390-25e2842a37f7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2110&q=80',
+    routeStateLoaded: false,
   };
 }

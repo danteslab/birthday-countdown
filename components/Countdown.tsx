@@ -22,8 +22,11 @@ export const Countdown = () => {
       console.info('Initializing birthday with: ', { birthday: queryState.birthday });
 
       dispatchCountdownAction({
-        type: CountdownActionType.UPDATE_DATE,
-        birthday: queryState.birthday,
+        type: CountdownActionType.INITIALIZE,
+        state: {
+          birthday: queryState.birthday,
+          backgroundUrl: queryState.backgroundUrl,
+        },
       });
     }
   }, []);
@@ -40,26 +43,34 @@ export const Countdown = () => {
       });
     }, 1000);
 
-    updateRouteState(router, { birthday: countdownState.birthday });
+    updateRouteState(router, {
+      birthday: countdownState.birthday,
+      backgroundUrl: countdownState.backgroundUrl,
+    });
 
     return () => {
       clearInterval(interval.current);
     };
-  }, [countdownState.birthday]);
+  }, [countdownState.birthday, countdownState.backgroundUrl]);
 
   return (
-    <CounterContainer ref={containerTarget}>
+    <CounterContainer
+      style={{ backgroundImage: `url("${countdownState.backgroundUrl}")` }}
+      ref={containerTarget}
+    >
       <Clock
         days={countdownState.days}
         hours={countdownState.hours}
         minutes={countdownState.minutes}
         seconds={countdownState.seconds}
       />
-      <Options
-        countdownState={countdownState}
-        containerTarget={containerTarget}
-        dispatchCountdownAction={dispatchCountdownAction}
-      />
+      {countdownState.routeStateLoaded && (
+        <Options
+          countdownState={countdownState}
+          containerTarget={containerTarget}
+          dispatchCountdownAction={dispatchCountdownAction}
+        />
+      )}
     </CounterContainer>
   );
 };
@@ -70,4 +81,8 @@ const CounterContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
 `;
