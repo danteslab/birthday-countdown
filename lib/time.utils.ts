@@ -15,6 +15,10 @@ export namespace TimeUtils {
     return Math.floor((((ms % 8.64e7) % 3.6e6) % 60000) / 1000);
   }
 
+  export function hoursToMs(hours: number): number {
+    return  hours * 3.6e+6;
+  }
+
   export function isMyBirthday(date: Date): boolean {
     const today = new Date();
 

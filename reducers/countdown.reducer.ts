@@ -34,12 +34,16 @@ export function countdownContextReducer(
         birthday: action.birthday,
       };
     case CountdownActionType.RECALCULATE:
-      const birthday = new Date(state.birthday.getTime());
       const now = new Date();
+      const birthday = new Date(state.birthday.getTime());
       /** To calculate the difference of this year birthday */
       birthday.setFullYear(now.getFullYear());
 
-      const missingMiliseconds = birthday.getTime() - now.getTime();
+      let missingMiliseconds = birthday.getTime() - now.getTime();
+      if(missingMiliseconds < 0) {
+        birthday.setFullYear(now.getFullYear() + 1);
+        missingMiliseconds = birthday.getTime() - now.getTime(); 
+      }
 
       const days = TimeUtils.msToDays(missingMiliseconds);
       const hours = TimeUtils.msToHours(missingMiliseconds);
