@@ -16,7 +16,7 @@ export namespace TimeUtils {
   }
 
   export function hoursToMs(hours: number): number {
-    return  hours * 3.6e+6;
+    return hours * 3.6e6;
   }
 
   export function isMyBirthday(date: Date): boolean {

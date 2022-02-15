@@ -40,9 +40,9 @@ export function countdownContextReducer(
       birthday.setFullYear(now.getFullYear());
 
       let missingMiliseconds = birthday.getTime() - now.getTime();
-      if(missingMiliseconds < 0) {
+      if (missingMiliseconds < 0) {
         birthday.setFullYear(now.getFullYear() + 1);
-        missingMiliseconds = birthday.getTime() - now.getTime(); 
+        missingMiliseconds = birthday.getTime() - now.getTime();
       }
 
       const days = TimeUtils.msToDays(missingMiliseconds);

@@ -19,11 +19,11 @@ export default class MyApp extends App {
       <Layout>
         <React.Fragment>
           <Head>
-            <title>Change Title</title>
             <meta
               name="viewport"
               content="minimum-scale=1, initial-scale=1, width=device-width"
             />
+            <title>Birthday Timer</title>
           </Head>
           <Component {...pageProps} />
         </React.Fragment>
