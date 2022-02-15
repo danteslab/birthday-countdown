@@ -1,11 +1,11 @@
-import React from 'react'
-import styled from 'styled-components'
-import { CountdownContextProvider } from '../contexts/countdown.context'
-import { globalStyles } from '../styles/global.styles'
+import React from 'react';
+import styled from 'styled-components';
+import { CountdownContextProvider } from '../contexts/countdown.context';
+import { globalStyles } from '../styles/global.styles';
 
 type LayoutProps = {
-  children: React.ReactChild
-}
+  children: React.ReactChild;
+};
 
 export const Layout = ({ children }: LayoutProps) => {
   return (
@@ -17,8 +17,8 @@ export const Layout = ({ children }: LayoutProps) => {
         </style>
       </>
     </CountdownContextProvider>
-  )
-}
+  );
+};
 
 const Container = styled.div`
   background: #f9fafa;
@@ -31,4 +31,4 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`
+`;

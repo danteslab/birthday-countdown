@@ -1,18 +1,18 @@
-import { useRef, useState } from 'react'
-import styled from 'styled-components'
-import { CountdownContextValue } from '../contexts/countdown.context'
-import { forceLocalDateFromUTCDate } from '../lib/utils'
-import { CountdownActionType } from '../reducers/countdown.reducer'
-import { Popover } from './Popover'
+import { useRef, useState } from 'react';
+import styled from 'styled-components';
+import { CountdownContextValue } from '../contexts/countdown.context';
+import { forceLocalDateFromUTCDate } from '../lib/utils';
+import { CountdownActionType } from '../reducers/countdown.reducer';
+import { Popover } from './Popover';
 
 export function Options({
   countdownState,
   dispatchCountdownAction,
   containerTarget,
 }: CountdownContextValue | any) {
-  const popupTarget = useRef()
+  const popupTarget = useRef();
 
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
 
   return (
     <Wrapper>
@@ -21,7 +21,7 @@ export function Options({
         src="https://icongr.am/feather/settings.svg?size=32&color=ffffff"
         ref={popupTarget}
         onClick={() => {
-          setOpen(prev => !prev)
+          setOpen(prev => !prev);
         }}
       />
       <Popover
@@ -31,8 +31,8 @@ export function Options({
         containerStyle={{ zIndex: 99 }}
         show={open}
         onHide={() => {
-          console.log('HIHIHIDEEE')
-          setOpen(false)
+          console.log('HIHIHIDEEE');
+          setOpen(false);
         }}
       >
         <OptionsContainer>
@@ -44,15 +44,15 @@ export function Options({
               dispatchCountdownAction({
                 type: CountdownActionType.UPDATE_DATE,
                 birthday: forceLocalDateFromUTCDate(event.target.valueAsDate),
-              })
+              });
             }}
           />
           <button
             onClick={() => {
               if (!document.fullscreenElement) {
-                document.querySelector('body').requestFullscreen()
+                document.querySelector('body').requestFullscreen();
               } else {
-                document.exitFullscreen()
+                document.exitFullscreen();
               }
             }}
           >
@@ -61,7 +61,7 @@ export function Options({
         </OptionsContainer>
       </Popover>
     </Wrapper>
-  )
+  );
 }
 
 const Wrapper = styled.div`
@@ -81,7 +81,7 @@ const Wrapper = styled.div`
       opacity: 1;
     }
   }
-`
+`;
 
 const OptionsContainer = styled.div`
   background: #a8a8a86e;
@@ -95,4 +95,4 @@ const OptionsContainer = styled.div`
   border-radius: 4px;
   border-radius: 4px;
   position: absolute;
-`
+`;

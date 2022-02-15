@@ -1,4 +1,4 @@
-import css from 'styled-jsx/css'
+import css from 'styled-jsx/css';
 
 export const globalStyles = css.global`
   body {
@@ -16,4 +16,4 @@ export const globalStyles = css.global`
   p {
     margin-bottom: 10px;
   }
-`
+`;

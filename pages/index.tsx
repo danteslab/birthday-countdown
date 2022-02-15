@@ -1,8 +1,8 @@
-import React from 'react'
-import { Countdown } from '../components/Countdown'
+import React from 'react';
+import { Countdown } from '../components/Countdown';
 
 const Index = () => {
-  return <Countdown />
-}
+  return <Countdown />;
+};
 
-export default Index
+export default Index;

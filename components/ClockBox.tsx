@@ -1,10 +1,10 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 
 type ClockBoxProps = {
-  count: number
-  text: string
-}
+  count: number;
+  text: string;
+};
 
 export const ClockBox = ({ count, text }: ClockBoxProps) => {
   return (
@@ -12,22 +12,22 @@ export const ClockBox = ({ count, text }: ClockBoxProps) => {
       <Count>{count}</Count>
       <Text>{text}</Text>
     </ClockBoxContainer>
-  )
-}
+  );
+};
 
 const Count = styled.p`
   color: white;
   font-size: 44px;
   margin: 0;
   font-weight: 800;
-`
+`;
 
 const Text = styled.p`
   margin: 0;
   color: white;
   font-weight: 600;
   text-transform: uppercase;
-`
+`;
 
 const ClockBoxContainer = styled.div`
   background: #9191916e;
@@ -38,4 +38,4 @@ const ClockBoxContainer = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-`
+`;

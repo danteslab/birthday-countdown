@@ -1,13 +1,13 @@
-import { TimeUtils } from '../lib/time.utils'
+import { TimeUtils } from '../lib/time.utils';
 
 export type CountdownAction =
   | {
-      type: CountdownActionType.UPDATE_DATE
-      birthday: Date
+      type: CountdownActionType.UPDATE_DATE;
+      birthday: Date;
     }
   | {
-      type: CountdownActionType.RECALCULATE
-    }
+      type: CountdownActionType.RECALCULATE;
+    };
 
 export enum CountdownActionType {
   UPDATE_DATE = 'UPDATE_DATE',
@@ -15,13 +15,13 @@ export enum CountdownActionType {
 }
 
 export type CountdownState = {
-  birthday: Date
-  days: number
-  hours: number
-  minutes: number
-  seconds: number
-  isMyBirthday: boolean
-}
+  birthday: Date;
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+  isMyBirthday: boolean;
+};
 
 export function countdownContextReducer(
   state: CountdownState,
@@ -32,19 +32,19 @@ export function countdownContextReducer(
       return {
         ...state,
         birthday: action.birthday,
-      }
+      };
     case CountdownActionType.RECALCULATE:
-      const birthday = new Date(state.birthday.getTime())
-      const now = new Date()
+      const birthday = new Date(state.birthday.getTime());
+      const now = new Date();
       /** To calculate the difference of this year birthday */
-      birthday.setFullYear(now.getFullYear())
+      birthday.setFullYear(now.getFullYear());
 
-      const missingMiliseconds = birthday.getTime() - now.getTime()
+      const missingMiliseconds = birthday.getTime() - now.getTime();
 
-      const days = TimeUtils.msToDays(missingMiliseconds)
-      const hours = TimeUtils.msToHours(missingMiliseconds)
-      const minutes = TimeUtils.msToMinutes(missingMiliseconds)
-      const seconds = TimeUtils.msToSeconds(missingMiliseconds)
+      const days = TimeUtils.msToDays(missingMiliseconds);
+      const hours = TimeUtils.msToHours(missingMiliseconds);
+      const minutes = TimeUtils.msToMinutes(missingMiliseconds);
+      const seconds = TimeUtils.msToSeconds(missingMiliseconds);
 
       return {
         ...state,
@@ -53,14 +53,14 @@ export function countdownContextReducer(
         minutes,
         seconds,
         isMyBirthday: TimeUtils.isMyBirthday(birthday),
-      }
+      };
     default:
-      return state
+      return state;
   }
 }
 
 export function countdownStateInitializer(): CountdownState {
-  const initialGoalDate = new Date(new Date().getTime() + 10000000000)
+  const initialGoalDate = new Date(new Date().getTime() + 10000000000);
 
   return {
     birthday: initialGoalDate,
@@ -69,5 +69,5 @@ export function countdownStateInitializer(): CountdownState {
     minutes: 0,
     seconds: 0,
     isMyBirthday: false,
-  }
+  };
 }

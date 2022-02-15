@@ -1,12 +1,12 @@
-import React from 'react'
-import styled from 'styled-components'
-import { ClockBox } from './ClockBox'
+import React from 'react';
+import styled from 'styled-components';
+import { ClockBox } from './ClockBox';
 
 interface ClockProps {
-  days: number
-  hours: number
-  minutes: number
-  seconds: number
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
 }
 
 export const Clock = ({ days, hours, minutes, seconds }: ClockProps) => {
@@ -17,9 +17,9 @@ export const Clock = ({ days, hours, minutes, seconds }: ClockProps) => {
       <ClockBox count={minutes} text="Minutes" />
       <ClockBox count={seconds} text="Seconds" />
     </ClockContainer>
-  )
-}
+  );
+};
 
 const ClockContainer = styled.div`
   display: flex;
-`
+`;

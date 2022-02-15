@@ -1,8 +1,8 @@
-import React from 'react'
-import Overlay from 'react-overlays/Overlay'
+import React from 'react';
+import Overlay from 'react-overlays/Overlay';
 
 export const Popover = props => {
-  const { children } = props
+  const { children } = props;
 
   return (
     <Overlay
@@ -16,5 +16,5 @@ export const Popover = props => {
     >
       {() => children}
     </Overlay>
-  )
-}
+  );
+};

@@ -1,35 +1,35 @@
-import React, { useReducer } from 'react'
+import React, { useReducer } from 'react';
 import {
   CountdownAction,
   countdownContextReducer,
   CountdownState,
   countdownStateInitializer,
-} from '../reducers/countdown.reducer'
+} from '../reducers/countdown.reducer';
 
 export type CountdownContextValue = {
-  countdownState: CountdownState
-  dispatchCountdownAction: React.Dispatch<CountdownAction>
-}
+  countdownState: CountdownState;
+  dispatchCountdownAction: React.Dispatch<CountdownAction>;
+};
 
 type CountdownContextProviderProps = {
-  children: React.ElementRef<any>
-}
+  children: React.ElementRef<any>;
+};
 
-const CountDownContext = React.createContext<CountdownContextValue>(undefined)
+const CountDownContext = React.createContext<CountdownContextValue>(undefined);
 
 function CountdownContextProvider({ children }: CountdownContextProviderProps) {
   const [countdownState, dispatchCountdownAction] = useReducer(
     countdownContextReducer,
     undefined,
     countdownStateInitializer
-  )
+  );
 
   const value: CountdownContextValue = {
     countdownState,
     dispatchCountdownAction,
-  }
+  };
 
-  return <CountDownContext.Provider value={value}>{children}</CountDownContext.Provider>
+  return <CountDownContext.Provider value={value}>{children}</CountDownContext.Provider>;
 }
 
-export { CountDownContext, CountdownContextProvider }
+export { CountDownContext, CountdownContextProvider };
