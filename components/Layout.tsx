@@ -8,12 +8,10 @@ type LayoutProps = {
 }
 
 export const Layout = ({ children }: LayoutProps) => {
-  return  (
+  return (
     <CountdownContextProvider>
       <>
-        <Container>
-          {children}
-        </Container>
+        <Container>{children}</Container>
         <style jsx global>
           {globalStyles}
         </style>

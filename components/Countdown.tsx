@@ -9,57 +9,57 @@ import { Options } from './Options'
 
 export const Countdown = () => {
   const router = useRouter()
-  const { countdownState, dispatchCountdownAction  } = useContext(CountDownContext)
+  const { countdownState, dispatchCountdownAction } = useContext(CountDownContext)
   const interval = useRef<NodeJS.Timeout>()
   const containerTarget = useRef()
 
   useEffect(() => {
     console.info('Execting first time')
 
-    const { queryState } = getRouteState(router);
+    const { queryState } = getRouteState(router)
 
-    if(queryState.birthday) {
+    if (queryState.birthday) {
       console.info('Initializing birthday with: ', { birthday: queryState.birthday })
 
       dispatchCountdownAction({
         type: CountdownActionType.UPDATE_DATE,
-        birthday: queryState.birthday
+        birthday: queryState.birthday,
       })
     }
   }, [])
 
   useEffect(() => {
-    if(interval.current) {
+    if (interval.current) {
       console.info('Clearing interval due to birthday has been updated')
       clearInterval(interval.current)
     }
-    
+
     interval.current = setInterval(() => {
       dispatchCountdownAction({
-        type: CountdownActionType.RECALCULATE
+        type: CountdownActionType.RECALCULATE,
       })
     }, 1000)
 
-    updateRouteState(router, { birthday: countdownState.birthday  })
+    updateRouteState(router, { birthday: countdownState.birthday })
 
     return () => {
       clearInterval(interval.current)
     }
   }, [countdownState.birthday])
 
-
   return (
     <CounterContainer ref={containerTarget}>
-      <Clock 
+      <Clock
         days={countdownState.days}
         hours={countdownState.hours}
         minutes={countdownState.minutes}
         seconds={countdownState.seconds}
-        />
-      <Options 
+      />
+      <Options
         countdownState={countdownState}
         containerTarget={containerTarget}
-        dispatchCountdownAction={dispatchCountdownAction} />
+        dispatchCountdownAction={dispatchCountdownAction}
+      />
     </CounterContainer>
   )
 }

@@ -25,10 +25,10 @@ const mapper = new Morph({
         .map(i => parseInt(i))
     },
     date: v => {
-      const date = new Date(v);
-      if(!isValidDate(date)) {
+      const date = new Date(v)
+      if (!isValidDate(date)) {
         console.error('The date value you specified is not valid', { value: v })
-        return undefined;
+        return undefined
       }
 
       return new Date(date.getTime() + date.getTimezoneOffset() * 60000)
@@ -68,13 +68,9 @@ const mapper = new Morph({
   },
 })
 
-const readMappings = [
-  { field: 'b:birthday', type: 'date' },
-]
+const readMappings = [{ field: 'b:birthday', type: 'date' }]
 
-const writeMappings = [
-  { field: 'birthday:b', type: 'encodeDate' },
-]
+const writeMappings = [{ field: 'birthday:b', type: 'encodeDate' }]
 
 export function deserializeState(serializedState) {
   let stateString
@@ -86,7 +82,6 @@ export function deserializeState(serializedState) {
 
   return JSON.parse(decodeURIComponent(stateString))
 }
-
 
 const getQueryStringObject = query => {
   if (query.state) {
@@ -109,10 +104,10 @@ function getQueryStringState(query) {
 }
 
 export function getRouteState(router: NextRouter) {
-  const { asPath  = '' } = router
+  const { asPath = '' } = router
 
   const { query, pathname } = fixAsPathEncoding(asPath)
-  const queryState = getQueryStringState(query)  
+  const queryState = getQueryStringState(query)
   const path = escapeHtml(
     pathname
       // remove trailing slash
@@ -125,7 +120,7 @@ export function getRouteState(router: NextRouter) {
 
   return {
     parameter,
-    queryState
+    queryState,
   }
 }
 
@@ -136,7 +131,6 @@ function fixAsPathEncoding(asPath: string): UrlWithParsedQuery {
     return url.parse(encodeURI(asPath), true)
   }
 }
-
 
 export function updateRouteState(router: NextRouter, state = {}) {
   const mappedState = mapper.map(writeMappings, state)

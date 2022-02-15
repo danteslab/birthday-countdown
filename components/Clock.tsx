@@ -5,11 +5,11 @@ import { ClockBox } from './ClockBox'
 interface ClockProps {
   days: number
   hours: number
-  minutes: number 
+  minutes: number
   seconds: number
 }
 
-export const Clock = ({  days, hours, minutes, seconds }: ClockProps) => {
+export const Clock = ({ days, hours, minutes, seconds }: ClockProps) => {
   return (
     <ClockContainer>
       <ClockBox count={days} text="Days" />
