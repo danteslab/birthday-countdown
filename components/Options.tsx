@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import styled from 'styled-components'
 import { CountdownContextValue } from '../contexts/countdown.context'
+import { forceLocalDateFromUTCDate } from '../lib/utils'
 import { CountdownActionType } from '../reducers/countdown.reducer'
 import { Popover } from './Popover'
 
@@ -42,7 +43,7 @@ export function Options({
             onChange={event => {
               dispatchCountdownAction({
                 type: CountdownActionType.UPDATE_DATE,
-                birthday: event.target.valueAsDate,
+                birthday: forceLocalDateFromUTCDate(event.target.valueAsDate),
               })
             }}
           />

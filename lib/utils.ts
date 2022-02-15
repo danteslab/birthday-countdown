@@ -16,3 +16,7 @@ export const unescapeHtml = s => {
 export function isValidDate(date): boolean {
   return date instanceof Date && !isNaN(date as any)
 }
+
+export function forceLocalDateFromUTCDate(date: Date): Date {
+  return new Date(date.getTime() + date.getTimezoneOffset() * 60000)
+}

@@ -1,7 +1,7 @@
 import { NextRouter } from 'next/router'
 import Morph from 'morphmorph'
 import url, { UrlWithParsedQuery } from 'url'
-import { escapeHtml, isValidDate } from './utils'
+import { escapeHtml, forceLocalDateFromUTCDate, isValidDate } from './utils'
 
 const URL_LIMIT = 4e3
 
@@ -31,7 +31,7 @@ const mapper = new Morph({
         return undefined
       }
 
-      return new Date(date.getTime() + date.getTimezoneOffset() * 60000)
+      return forceLocalDateFromUTCDate(date)
     },
     encodeDate: (v: Date) => {
       return v.toISOString().substring(0, 10)

@@ -1,3 +1,5 @@
+import { TimeUtils } from '../lib/time.utils'
+
 export type CountdownAction =
   | {
       type: CountdownActionType.UPDATE_DATE
@@ -18,9 +20,13 @@ export type CountdownState = {
   hours: number
   minutes: number
   seconds: number
+  isMyBirthday: boolean
 }
 
-export function countdownContextReducer(state: CountdownState, action: CountdownAction) {
+export function countdownContextReducer(
+  state: CountdownState,
+  action: CountdownAction
+): CountdownState {
   switch (action.type) {
     case CountdownActionType.UPDATE_DATE:
       return {
@@ -35,10 +41,10 @@ export function countdownContextReducer(state: CountdownState, action: Countdown
 
       const missingMiliseconds = birthday.getTime() - now.getTime()
 
-      const days = Math.floor(missingMiliseconds / 8.64e7)
-      const hours = Math.floor((missingMiliseconds % 8.64e7) / 3.6e6)
-      const minutes = Math.floor(((missingMiliseconds % 8.64e7) % 3.6e6) / 60000)
-      const seconds = Math.floor((((missingMiliseconds % 8.64e7) % 3.6e6) % 60000) / 1000)
+      const days = TimeUtils.msToDays(missingMiliseconds)
+      const hours = TimeUtils.msToHours(missingMiliseconds)
+      const minutes = TimeUtils.msToMinutes(missingMiliseconds)
+      const seconds = TimeUtils.msToSeconds(missingMiliseconds)
 
       return {
         ...state,
@@ -46,6 +52,7 @@ export function countdownContextReducer(state: CountdownState, action: Countdown
         hours,
         minutes,
         seconds,
+        isMyBirthday: TimeUtils.isMyBirthday(birthday),
       }
     default:
       return state
@@ -53,7 +60,7 @@ export function countdownContextReducer(state: CountdownState, action: Countdown
 }
 
 export function countdownStateInitializer(): CountdownState {
-  const initialGoalDate = new Date(new Date().getTime() - 100000000)
+  const initialGoalDate = new Date(new Date().getTime() + 10000000000)
 
   return {
     birthday: initialGoalDate,
@@ -61,5 +68,6 @@ export function countdownStateInitializer(): CountdownState {
     hours: 0,
     minutes: 0,
     seconds: 0,
+    isMyBirthday: false,
   }
 }
