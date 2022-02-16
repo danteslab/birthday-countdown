@@ -30,7 +30,7 @@ const Text = styled.p`
 `;
 
 const ClockBoxContainer = styled.div`
-  background: #9191916e;
+  background: #40404091;
   padding: 4px 24px;
   border-radius: 4px;
   display: flex;
