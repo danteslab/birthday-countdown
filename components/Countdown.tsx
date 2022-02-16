@@ -14,21 +14,15 @@ export const Countdown = () => {
   const containerTarget = useRef();
 
   useEffect(() => {
-    console.info('Execting first time');
-
     const { queryState } = getRouteState(router);
 
-    if (queryState.birthday) {
-      console.info('Initializing birthday with: ', { birthday: queryState.birthday });
-
-      dispatchCountdownAction({
-        type: CountdownActionType.INITIALIZE,
-        state: {
-          birthday: queryState.birthday,
-          backgroundUrl: queryState.backgroundUrl,
-        },
-      });
-    }
+    dispatchCountdownAction({
+      type: CountdownActionType.INITIALIZE,
+      state: {
+        birthday: queryState.birthday,
+        backgroundUrl: queryState.backgroundUrl,
+      },
+    });
   }, []);
 
   useEffect(() => {
