@@ -2,6 +2,7 @@ import { NextRouter } from 'next/router';
 import Morph from 'morphmorph';
 import url, { UrlWithParsedQuery } from 'url';
 import { escapeHtml, forceLocalDateFromUTCDate, isValidDate } from './utils';
+import logger from '../logger/pino.logger';
 
 const URL_LIMIT = 4e3;
 
@@ -27,7 +28,7 @@ const mapper = new Morph({
     date: v => {
       const date = new Date(v);
       if (!isValidDate(date)) {
-        console.error('The date value you specified is not valid', { value: v });
+        logger.info('The date value you specified is not valid', { value: v });
         return undefined;
       }
 
