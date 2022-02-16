@@ -40,6 +40,9 @@ export function Options({
         <OptionsContainer>
           <b>OPTIONS</b>
           <Button
+            style={{
+              fontSize: 12,
+            }}
             onClick={() => {
               if (!document.fullscreenElement) {
                 document.querySelector('body').requestFullscreen();
@@ -48,7 +51,7 @@ export function Options({
               }
             }}
           >
-            ◻
+            FullScreen: {document.fullscreenElement ? 'ON' : 'OFF'}
           </Button>
           <Label>Your Birthday:</Label>
           <Input
