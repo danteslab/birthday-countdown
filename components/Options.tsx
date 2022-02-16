@@ -14,7 +14,7 @@ export function Options({
   containerTarget,
 }: CountdownContextValue & Record<any, any>) {
   const popupTarget = useRef();
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const [birthday, setBirthday] = useState(countdownState.birthday);
   const [backgroundUrl, setBackgroundUrl] = useState(countdownState.backgroundUrl);
@@ -39,7 +39,7 @@ export function Options({
       >
         <OptionsContainer>
           <b>OPTIONS</b>
-          {/* <button
+          <Button
             onClick={() => {
               if (!document.fullscreenElement) {
                 document.querySelector('body').requestFullscreen();
@@ -48,8 +48,8 @@ export function Options({
               }
             }}
           >
-            [FullScreen]
-          </button> */}
+            ◻
+          </Button>
           <Label>Your Birthday:</Label>
           <Input
             type="date"
