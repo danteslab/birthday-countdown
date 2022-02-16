@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import { CountdownContextValue } from '../contexts/countdown.context';
 import { forceLocalDateFromUTCDate } from '../lib/utils';
 import { CountdownActionType } from '../reducers/countdown.reducer';
+import { Button } from './forms/Button';
+import { Input } from './forms/Input';
+import { Label } from './forms/Label';
 import { Popover } from './Popover';
 
 export function Options({
@@ -11,7 +14,7 @@ export function Options({
   containerTarget,
 }: CountdownContextValue & Record<any, any>) {
   const popupTarget = useRef();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   const [birthday, setBirthday] = useState(countdownState.birthday);
   const [backgroundUrl, setBackgroundUrl] = useState(countdownState.backgroundUrl);
@@ -35,8 +38,8 @@ export function Options({
         onHide={() => setOpen(false)}
       >
         <OptionsContainer>
-          <b>Options:</b>
-          <button
+          <b>OPTIONS</b>
+          {/* <button
             onClick={() => {
               if (!document.fullscreenElement) {
                 document.querySelector('body').requestFullscreen();
@@ -46,18 +49,26 @@ export function Options({
             }}
           >
             [FullScreen]
-          </button>
-          <input
+          </button> */}
+          <Label>Your Birthday:</Label>
+          <Input
             type="date"
+            style={{ width: '100%' }}
             value={birthday.toISOString().substring(0, 10)}
             onChange={event => setBirthday(event.target.valueAsDate)}
           />
-          <input
+
+          <Label>Background Url:</Label>
+          <Input
             type="text"
+            style={{ width: '100%' }}
             value={backgroundUrl}
             onChange={e => setBackgroundUrl(e.target.value)}
           />
-          <button
+          <Button
+            style={{
+              marginTop: 10,
+            }}
             onClick={() => {
               dispatchCountdownAction({
                 type: CountdownActionType.INITIALIZE,
@@ -68,8 +79,8 @@ export function Options({
               });
             }}
           >
-            Update
-          </button>
+            Apply
+          </Button>
         </OptionsContainer>
       </Popover>
     </Wrapper>
@@ -88,7 +99,7 @@ const Wrapper = styled.div`
     border-radius: 4px;
     opacity: 0.4;
     cursor: pointer;
-    background: #7c7c7c91;
+    background: #40404091;
     &:hover {
       opacity: 1;
     }
@@ -96,14 +107,15 @@ const Wrapper = styled.div`
 `;
 
 const OptionsContainer = styled.div`
-  background: #a8a8a86e;
+  background: #40404091;
+  width: 240px;
   color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   right: 14px;
   top: 60px;
-  padding: 10px;
+  padding: 10px 17px;
   border-radius: 4px;
   border-radius: 4px;
   position: absolute;
